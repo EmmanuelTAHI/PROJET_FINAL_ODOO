@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- CRON job pour alerter la fin de la garantie -->
+    <record id="cron_alert_end_of_warranty" model="ir.cron">
+        <field name="name">Alerte fin de garantie</field>
+        <field name="model_id" ref="model_it_asset"/>
+        <field name="state">code</field>
+        <field name="code">
+            model._check_warranty_end()
+        </field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- CRON job pour alerter la fin des contrats -->
+    <record id="cron_alert_end_of_contract" model="ir.cron">
+        <field name="name">Alerte fin de contrat</field>
+        <field name="model_id" ref="model_it_contract"/>
+        <field name="state">code</field>
+        <field name="code">
+            model._check_contract_expiry()
+        </field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

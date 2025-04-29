@@ -1,0 +1,23 @@
+<odoo>
+    <template id="portal_it_assets">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1>Mon Parc Informatique</h1>
+                <t t-if="assets">
+                    <ul>
+                        <t t-foreach="assets" t-as="asset">
+                            <li>
+                                <strong><t t-esc="asset.name"/></strong><br/>
+                                <span><t t-esc="asset.serial_number"/> | <t t-esc="asset.model"/></span><br/>
+                                <span>Fin de garantie: <t t-esc="asset.warranty_end_date"/></span>
+                            </li>
+                        </t>
+                    </ul>
+                </t>
+                <t t-if="not assets">
+                    <p>Aucun équipement dans le parc informatique.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

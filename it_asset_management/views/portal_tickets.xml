@@ -1,0 +1,23 @@
+<odoo>
+    <template id="portal_tickets">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1>Mes Tickets</h1>
+                <t t-if="tickets">
+                    <ul>
+                        <t t-foreach="tickets" t-as="ticket">
+                            <li>
+                                <strong><t t-esc="ticket.name"/></strong><br/>
+                                <span><t t-esc="ticket.status"/> | <t t-esc="ticket.priority"/></span>
+                                <p><t t-esc="ticket.description"/></p>
+                            </li>
+                        </t>
+                    </ul>
+                </t>
+                <t t-if="not tickets">
+                    <p>Aucun ticket n'est actuellement ouvert.</p>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

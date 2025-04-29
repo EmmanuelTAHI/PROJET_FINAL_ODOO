@@ -1,0 +1,32 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<odoo>-->
+<!--    &lt;!&ndash; Exemple d'équipement &ndash;&gt;-->
+<!--    <record id="it_asset_example" model="it.asset">-->
+<!--        <field name="name">Ordinateur Dell</field>-->
+<!--        <field name="serial_number">ABC12345</field>-->
+<!--        <field name="model">XPS 15</field>-->
+<!--        <field name="warranty_end_date">2025-06-01</field>-->
+<!--        <field name="client_id" ref="base.main_partner"/>-->
+<!--        <field name="location">Bureau principal</field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Exemple de contrat &ndash;&gt;-->
+<!--    <record id="it_contract_example" model="it.contract">-->
+<!--        <field name="name">Contrat d'entretien Dell</field>-->
+<!--        <field name="client_id" ref="base.main_partner"/>-->
+<!--        <field name="start_date">2023-06-01</field>-->
+<!--        <field name="end_date">2025-06-01</field>-->
+<!--        <field name="amount">5000.00</field>-->
+<!--        <field name="renewal">True</field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Exemple de ticket d'incident &ndash;&gt;-->
+<!--    <record id="it_ticket_example" model="it.ticket">-->
+<!--        <field name="name">Problème imprimante</field>-->
+<!--        <field name="description">L'imprimante ne démarre pas</field>-->
+<!--        <field name="status">open</field>-->
+<!--        <field name="client_id" ref="base.main_partner"/>-->
+<!--        <field name="priority">high</field>-->
+<!--        <field name="assigned_to" ref="base.user_admin"/>-->
+<!--    </record>-->
+<!--</odoo>-->
