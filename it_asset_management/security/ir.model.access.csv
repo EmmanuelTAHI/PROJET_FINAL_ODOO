@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_it_asset_technician,access.it.asset.technician,model_it_asset,group_it_technician,1,1,1,1
-access_it_asset_user,access.it.asset.user,model_it_asset,base.group_user,1,1,1,1
-access_it_contract_user,access.it.contract.user,model_it_contract,base.group_user,1,1,1,1
-access_it_ticket_user,access.it.ticket.user,model_it_ticket,base.group_user,1,1,1,1

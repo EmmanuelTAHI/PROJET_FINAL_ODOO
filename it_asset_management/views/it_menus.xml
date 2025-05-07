@@ -1,8 +1,0 @@
-<odoo>
-    <menuitem name="Gestion de Parc Informatique" id="it_management_menu" web_icon="it_asset_management,static/description/icon.png"/>
-    <menuitem name="Parc Informatique" id="it_asset_menu" parent="it_management_menu" action="action_it_asset" sequence="1"/>
-    <menuitem name="Contrats" id="it_contract_menu" parent="it_management_menu" action="action_it_contract" sequence="2"/>
-    <menuitem name="Tickets d'Incidents" id="it_ticket_menu" parent="it_management_menu" action="action_it_ticket" sequence="3"/>
-    <menuitem name="Clients" id="menu_it_client" parent="it_management_menu" action="action_it_client" sequence="4"/>
-    <menuitem name="Employés" id="menu_it_employe" parent="it_management_menu" action="action_it_employe" sequence="5"/>
-</odoo>
