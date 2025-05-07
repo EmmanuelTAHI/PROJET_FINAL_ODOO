@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue Formulaire -->
+    <record id="view_it_ticket_form" model="ir.ui.view">
+        <field name="name">it.ticket.form</field>
+        <field name="model">it.ticket</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Ticket d'incident">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="client_id"/>
+                        <field name="asset_id"/>
+                        <field name="technician_id"/>
+                        <field name="description"/>
+                        <field name="state"/>
+                        <field name="resolution_notes"/>
+                        <field name="date_opened"/>
+                        <field name="date_closed"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Liste -->
+    <record id="view_it_ticket_list" model="ir.ui.view">
+        <field name="name">it.ticket.list</field>
+        <field name="model">it.ticket</field>
+        <field name="arch" type="xml">
+            <list string="Tickets">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="asset_id"/>
+                <field name="technician_id"/>
+                <field name="state"/>
+                <field name="date_opened"/>
+                <field name="date_closed"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue Kanban -->
+    <record id="view_it_ticket_kanban" model="ir.ui.view">
+        <field name="name">it.ticket.kanban</field>
+        <field name="model">it.ticket</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_group_by="state">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <strong><field name="name"/></strong><br/>
+                            <field name="client_id"/><br/>
+                            <field name="asset_id"/><br/>
+                            <field name="technician_id"/><br/>
+                            <field name="state"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_it_ticket" model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="res_model">it.ticket</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+</odoo>

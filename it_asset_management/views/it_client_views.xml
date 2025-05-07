@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue formulaire pour les clients -->
+    <record id="view_it_client_form" model="ir.ui.view">
+        <field name="name">it.client.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="replace">
+                <group>
+                    <field name="name" placeholder="Nom du client"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="city"/>
+                    <field name="country_id"/>
+                </group>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group string="Employés liés">
+                    <field name="employee_ids">
+                        <list string="Employés">
+                            <field name="name"/>
+                            <field name="email"/>
+                        </list>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vue liste -->
+    <record id="view_it_client_list" model="ir.ui.view">
+        <field name="name">it.client.list</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Clients">
+                <field name="name"/>
+                <field name="email"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue kanban -->
+    <record id="view_it_client_kanban" model="ir.ui.view">
+        <field name="name">it.client.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong><br/>
+                                <field name="email"/><br/>
+                                <field name="phone"/><br/>
+                                <field name="city"/><br/>
+                                <field name="country_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue recherche -->
+    <record id="view_it_client_search" model="ir.ui.view">
+        <field name="name">it.client.search</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <filter name="filter_clients" string="Clients" domain="[('is_company', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_it_client" model="ir.actions.act_window">
+        <field name="name">Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('is_company', '=', True)]</field>
+        <field name="context">{'default_is_company': True}</field>
+        <field name="search_view_id" ref="view_it_client_search"/>
+    </record>
+</odoo>

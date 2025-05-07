@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_it_asset_technician,access.it.asset.technician,model_it_asset,group_it_technician,1,1,1,1
+access_it_asset_user,access.it.asset.user,model_it_asset,base.group_user,1,1,1,1
+access_it_asset_manager,access.it.asset.manager,model_it_asset,base.group_system,1,1,1,1
+access_it_contract_user,access.it.contract.user,model_it_contract,base.group_user,1,1,1,1
+access_it_contract_manager,access.it.contract.manager,model_it_contract,base.group_system,1,1,1,1
+access_it_ticket_user,access.it.ticket.user,model_it_ticket,base.group_user,1,1,1,1
+access_it_ticket_manager,access.it.ticket.manager,model_it_ticket,base.group_system,1,1,1,1
+access_it_site_user,access.it.site.user,model_it_site,base.group_user,1,1,1,1
+access_it_site_manager,access.it.site.manager,model_it_site,base.group_system,1,1,1,1

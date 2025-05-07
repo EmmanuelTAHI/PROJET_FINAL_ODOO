@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- CRON job pour vérifier l'expiration des garanties -->
+    <record id="cron_check_warranty_expiration" model="ir.cron">
+        <field name="name">Vérifier l'expiration des garanties</field>
+        <field name="model_id" ref="model_it_asset"/>
+        <field name="state">code</field>
+        <field name="code">model.check_warranty_expiration()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- CRON job pour vérifier l'expiration des licences -->
+    <record id="cron_check_license_expiration" model="ir.cron">
+        <field name="name">Vérifier l'expiration des licences</field>
+        <field name="model_id" ref="model_it_asset"/>
+        <field name="state">code</field>
+        <field name="code">model.check_license_expiration()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- CRON job pour vérifier le calendrier de maintenance -->
+    <record id="cron_check_maintenance_schedule" model="ir.cron">
+        <field name="name">Vérifier le calendrier de maintenance</field>
+        <field name="model_id" ref="model_it_asset"/>
+        <field name="state">code</field>
+        <field name="code">model.check_maintenance_schedule()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- CRON job pour alerter la fin des contrats -->
+    <record id="cron_alert_end_of_contract" model="ir.cron">
+        <field name="name">Alerte fin de contrat</field>
+        <field name="model_id" ref="model_it_contract"/>
+        <field name="state">code</field>
+        <field name="code">model._check_contract_expiry()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- CRON job pour générer les factures récurrentes -->
+    <record id="cron_generate_invoices" model="ir.cron">
+        <field name="name">Générer les factures récurrentes</field>
+        <field name="model_id" ref="model_it_contract"/>
+        <field name="state">code</field>
+        <field name="code">model.generate_recurring_invoices()</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall">2025-01-01 00:00:00</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

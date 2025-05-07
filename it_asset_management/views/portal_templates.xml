@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="portal_my_assets" name="Mes Équipements" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div class="col-md-4">
+                <a href="/my/assets" class="btn btn-primary">Mes Équipements</a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portal_assets_list" name="Liste des Équipements">
+        <t t-call="portal.portal_layout">
+            <h3>Mes Équipements</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Numéro de série</th>
+                        <th>État</th>
+                        <th>Site</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="assets" t-as="asset">
+                        <tr>
+                            <td><t t-esc="asset.name"/></td>
+                            <td><t t-esc="asset.category"/></td>
+                            <td><t t-esc="asset.serial_number"/></td>
+                            <td><t t-esc="asset.state"/></td>
+                            <td><t t-esc="asset.site_id.name"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+    <template id="portal_my_contracts" name="Mes Contrats" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div class="col-md-4">
+                <a href="/my/contracts" class="btn btn-primary">Mes Contrats</a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portal_contracts_list" name="Liste des Contrats">
+        <t t-call="portal.portal_layout">
+            <h3>Mes Contrats</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Référence</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Prix</th>
+                        <th>État</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="contracts" t-as="contract">
+                        <tr>
+                            <td><t t-esc="contract.name"/></td>
+                            <td><t t-esc="contract.start_date"/></td>
+                            <td><t t-esc="contract.end_date"/></td>
+                            <td><t t-esc="contract.price"/></td>
+                            <td><t t-esc="contract.state"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+    <template id="portal_my_tickets" name="Mes Tickets" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div class="col-md-4">
+                <a href="/my/tickets" class="btn btn-primary">Mes Tickets</a>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="portal_tickets_list" name="Liste des Tickets">
+        <t t-call="portal.portal_layout">
+            <h3>Mes Tickets</h3>
+            <a href="/my/tickets/new" class="btn btn-primary mb-3">Nouveau Ticket</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Référence</th>
+                        <th>Équipement</th>
+                        <th>État</th>
+                        <th>Date d'ouverture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="tickets" t-as="ticket">
+                        <tr>
+                            <td><t t-esc="ticket.name"/></td>
+                            <td><t t-esc="ticket.asset_id.name"/></td>
+                            <td><t t-esc="ticket.state"/></td>
+                            <td><t t-esc="ticket.date_opened"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+    <template id="portal_new_ticket" name="Nouveau Ticket">
+        <t t-call="portal.portal_layout">
+            <h3>Nouveau Ticket</h3>
+            <form action="/my/tickets/submit" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="form-group">
+                    <label for="asset_id">Équipement</label>
+                    <select name="asset_id" class="form-control" required="1">
+                        <t t-foreach="assets" t-as="asset">
+                            <option t-att-value="asset.id"><t t-esc="asset.name"/></option>
+                        </t>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description du problème</label>
+                    <textarea name="description" class="form-control" required="1"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Soumettre</button>
+            </form>
+        </t>
+    </template>
+</odoo>

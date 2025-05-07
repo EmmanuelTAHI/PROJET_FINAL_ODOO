@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue formulaire pour les contrats -->
+    <record id="view_it_contract_form" model="ir.ui.view">
+        <field name="name">it.contract.form</field>
+        <field name="model">it.contract</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Contrat de Service">
+                <header>
+                    <button name="action_activate"
+                            string="Activer"
+                            type="object"
+                            class="oe_highlight"
+                            groups="base.group_user"
+                            visible="record.state not in ('active', 'expired', 'cancelled')"/>
+
+                    <button name="action_cancel"
+                            string="Annuler"
+                            type="object"
+                            class="oe_highlight"
+                            groups="base.group_user"
+                            visible="record.state not in ('cancelled', 'expired')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,expired,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Référence du contrat"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Informations Générales">
+                            <field name="client_id" options="{'no_create': True}"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="frequency"/>
+                            <field name="price"/>
+                            <field name="next_invoice_date" readonly="1"/>
+                        </group>
+                        <group string="Détails">
+                            <field name="service_description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Équipements">
+                            <field name="asset_ids" widget="one2many_list">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="category"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Factures">
+                            <field name="invoice_ids" widget="one2many_list">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="invoice_date"/>
+                                    <field name="amount_total"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Kanban pour les contrats -->
+    <record id="view_it_contract_kanban" model="ir.ui.view">
+        <field name="name">it.contract.kanban</field>
+        <field name="model">it.contract</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+                <field name="price"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="name"/></strong><br/>
+                                <div>Client: <field name="client_id"/></div>
+                                <div>Début: <field name="start_date"/></div>
+                                <div>Fin: <field name="end_date"/></div>
+                                <div>Prix: <field name="price"/></div>
+                                <div>État: <field name="state"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue Liste pour les contrats -->
+    <record id="view_it_contract_list" model="ir.ui.view">
+        <field name="name">it.contract.list</field>
+        <field name="model">it.contract</field>
+        <field name="arch" type="xml">
+            <list string="Contrats">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="frequency"/>
+                <field name="price"/>
+                <field name="state"/>
+                <field name="next_invoice_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue de recherche pour les contrats -->
+    <record id="view_it_contract_search" model="ir.ui.view">
+        <field name="name">it.contract.search</field>
+        <field name="model">it.contract</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="state"/>
+                <filter string="Actifs" name="active" domain="[('state', '=', 'active')]"/>
+                <filter string="Expirés" name="expired" domain="[('state', '=', 'expired')]"/>
+                <group expand="1" string="Regrouper par">
+                    <filter string="Client" name="group_by_client" context="{'group_by': 'client_id'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour accéder aux contrats -->
+    <record id="action_it_contract" model="ir.actions.act_window">
+        <field name="name">Contrats</field>
+        <field name="res_model">it.contract</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+</odoo>

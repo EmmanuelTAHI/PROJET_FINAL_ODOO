@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue formulaire pour les sites -->
+    <record id="view_it_site_form" model="ir.ui.view">
+        <field name="name">it.site.form</field>
+        <field name="model">it.site</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Site Client">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom du site"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Informations">
+                            <field name="client_id" options="{'no_create': True}"/>
+                            <field name="address"/>
+                            <field name="city"/>
+                            <field name="country_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Équipements">
+                            <field name="asset_ids" widget="one2many_list">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="category"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Liste pour les sites -->
+    <record id="view_it_site_list" model="ir.ui.view">
+        <field name="name">it.site.list</field>
+        <field name="model">it.site</field>
+        <field name="arch" type="xml">
+            <list string="Sites">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="address"/>
+                <field name="city"/>
+                <field name="country_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue de recherche pour les sites -->
+    <record id="view_it_site_search" model="ir.ui.view">
+        <field name="name">it.site.search</field>
+        <field name="model">it.site</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="client_id"/>
+                <group expand="1" string="Regrouper par">
+                    <filter string="Client" name="group_by_client" context="{'group_by': 'client_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour accéder aux sites -->
+    <record id="action_it_site" model="ir.actions.act_window">
+        <field name="name">Sites</field>
+        <field name="res_model">it.site</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu pour les sites -->
+    <menuitem name="Sites" id="menu_it_site" parent="it_management_menu" action="action_it_site" sequence="6"/>
+</odoo>

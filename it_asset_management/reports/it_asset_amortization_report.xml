@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+        id="report_it_asset_amortization"
+        model="it.asset"
+        string="Rapport d'Amortissement"
+        report_type="qweb-pdf"
+        name="it_asset_management.report_it_asset_amortization_template"
+        file="it_asset_management.report_it_asset_amortization"
+    />
+
+    <template id="report_it_asset_amortization_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="asset">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Rapport d'Amortissement - <t t-esc="asset.name"/></h2>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Nom</th>
+                                <td><t t-esc="asset.name"/></td>
+                            </tr>
+                            <tr>
+                                <th>Catégorie</th>
+                                <td><t t-esc="asset.category"/></td>
+                            </tr>
+                            <tr>
+                                <th>Coût d'achat</th>
+                                <td><t t-esc="asset.cost"/></td>
+                            </tr>
+                            <tr>
+                                <th>Date d'achat</th>
+                                <td><t t-esc="asset.purchase_date"/></td>
+                            </tr>
+                            <tr>
+                                <th>Durée d'amortissement</th>
+                                <td><t t-esc="asset.amortization_years"/> ans</td>
+                            </tr>
+                            <tr>
+                                <th>Valeur amortie</th>
+                                <td><t t-esc="asset.amortized_value"/></td>
+                            </tr>
+                            <tr>
+                                <th>Valeur résiduelle</th>
+                                <td><t t-esc="asset.remaining_value"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

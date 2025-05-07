@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue formulaire pour les employés -->
+    <record id="view_it_employe_form" model="ir.ui.view">
+        <field name="name">it.employe.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Employé">
+                <sheet>
+                    <group>
+                        <field name="name" placeholder="Nom de l'employé"/>
+                        <field name="parent_id" string="Client" domain="[('is_company', '=', True)]"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste -->
+    <record id="view_it_employe_list" model="ir.ui.view">
+        <field name="name">it.employe.list</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Employés">
+                <field name="name"/>
+                <field name="parent_id" string="Client"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue kanban -->
+    <record id="view_it_employe_kanban" model="ir.ui.view">
+        <field name="name">it.employe.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_example">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong><br/>
+                                <t t-if="record.email.raw_value">
+                                    <div>Email : <field name="email"/></div>
+                                </t>
+                                <t t-if="record.phone.raw_value">
+                                    <div>Téléphone : <field name="phone"/></div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- Vue recherche -->
+    <record id="view_it_employe_search" model="ir.ui.view">
+        <field name="name">it.employe.search</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Employés">
+                <field name="name"/>
+                <field name="parent_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_it_employe" model="ir.actions.act_window">
+        <field name="name">Employés</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('is_company', '=', False), ('parent_id', '!=', False)]</field>
+        <field name="context">{'default_is_company': False}</field>
+    </record>
+</odoo>

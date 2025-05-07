@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Clients -->
+    <record id="client_1" model="res.partner">
+        <field name="name">Client A</field>
+        <field name="is_company">True</field>
+        <field name="email">client_a@example.com</field>
+        <field name="phone">+1234567890</field>
+    </record>
+
+    <record id="client_2" model="res.partner">
+        <field name="name">Client B</field>
+        <field name="is_company">True</field>
+        <field name="email">client_b@example.com</field>
+        <field name="phone">+0987654321</field>
+    </record>
+
+    <!-- Employés -->
+    <record id="employee_1" model="res.partner">
+        <field name="name">Jean Dupont</field>
+        <field name="is_company">False</field>
+        <field name="parent_id" ref="client_1"/>
+        <field name="email">jean.dupont@example.com</field>
+    </record>
+
+    <!-- Sites -->
+    <record id="site_1" model="it.site">
+        <field name="name">Siège Client A</field>
+        <field name="client_id" ref="client_1"/>
+        <field name="address">123 Rue Principale</field>
+        <field name="city">Paris</field>
+        <field name="country_id" ref="base.fr"/>
+    </record>
+
+    <!-- Équipements -->
+    <record id="asset_1" model="it.asset">
+        <field name="name">Ordinateur Portable HP</field>
+        <field name="category">ordinateur</field>
+        <field name="client_id" ref="client_1"/>
+        <field name="site_id" ref="site_1"/>
+        <field name="assigned_user_id" ref="employee_1"/>
+        <field name="purchase_date">2023-01-01</field>
+        <field name="warranty_end_date">2025-01-01</field>
+        <field name="cost">1200.0</field>
+        <field name="amortization_years">3</field>
+    </record>
+
+    <!-- Contrats -->
+    <record id="contract_1" model="it.contract">
+        <field name="name">Contrat Infogérance Client A</field>
+        <field name="client_id" ref="client_1"/>
+        <field name="start_date">2023-01-01</field>
+        <field name="end_date">2024-12-31</field>
+        <field name="frequency">monthly</field>
+        <field name="price">500</field>
+        <field name="state">active</field>
+        <field name="asset_ids" eval="[(6, 0, [ref('asset_1')])]"/>
+    </record>
+
+    <!-- Tickets -->
+    <record id="ticket_1" model="it.ticket">
+        <field name="name">TICKET-0001</field>
+        <field name="client_id" ref="client_1"/>
+        <field name="asset_id" ref="asset_1"/>
+        <field name="description">Problème de connexion réseau</field>
+        <field name="state">new</field>
+        <field name="date_opened">2023-06-01 10:00:00</field>
+    </record>
+</odoo>
